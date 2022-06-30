@@ -16,7 +16,7 @@ mongoose.connect('mongodb+srv://userlogin:uL4vNerORsY9r0ED@cluster0.6ft7s.mongod
             console.log('Conectado')
     } );
 
-
+app.use(express.json())
 app.use('/user', userRouter)
 
 
