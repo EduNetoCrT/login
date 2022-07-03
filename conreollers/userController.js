@@ -1,6 +1,7 @@
  const User = require('../models/User');
 const { use } = require('../routers/userRouter');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
  
  const user = new User();
 
@@ -40,9 +41,14 @@ const bcrypt = require('bcryptjs');
        const paasswordUserMatch = bcrypt.compareSync(password, selectUser.PWDhash);
 
        if(!paasswordUserMatch)
-       return res.json({msg:'Senha incorreta.'}).status(400);
+       return res.json({msg:'Senha incorreta.', }).status(400);
+       
+       const token = jwt.sign({id: selectUser.id}, process.env.TOKEN_SECRET)
+        res.header('authorization-token',token)
 
        res.json({msg: 'Usuário logado'});
+       
+
 
        
 

@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const userRouter = require('./routers/userRouter.js');
+const adminRouter = require('./routers/adminRouter')
 const mongoose = require('mongoose');
 
 
@@ -16,7 +17,8 @@ mongoose.connect('mongodb+srv://userlogin:uL4vNerORsY9r0ED@cluster0.6ft7s.mongod
             console.log('Conectado')
     } );
 
-app.use(express.json())
+app.use(express.json());
+app.use('/admin',adminRouter)
 app.use('/user', userRouter)
 
 
